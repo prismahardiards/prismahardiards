@@ -1,0 +1,120 @@
+<h2 id="statement">3</h2>
+<pre class="prettyprint" id="scoring-res">
+<DIV class="fl">
+import numpy as np
+import pandas as pd
+from scipy.stats import f_oneway
+import matplotlib.pyplot as plt
+
+# Step 1:<input size=40 ans="d2b2460ff8bbc1e1a28dc0706fdc9961538aa5bb4652d20f0ec0f3d9053c05dc" placeholder=1></input>
+group1 = [85, 90, 88, 75, 95]
+group2 = [70, 65, 60, 75, 80]
+group3 = [50, 55, 60, 65, 70]
+
+# Step 2:<input size=40 ans="5af0b4bff227581b4b595703a81fd5dedda41c2d8c42158168bddd9cdc04f085" placeholder=2></input>
+all_data = group1 + group2 + group3
+grand_mean = np.mean(all_data)
+
+# Step 3:<input size=40 ans="93a92bc321b538a0578f851190b7ccf338f76fed470ca6a85e349488ca3a1ad7" placeholder=3></input>
+mean1, mean2, mean3 = np.mean(group1), np.mean(group2), np.mean(group3)
+
+# Step 4:<input size=40 ans="fcb2b18d1cd12d64ac0fc76af755034623ecf7ccebf0b339d1ea2ef8d8c1333e" placeholder=4></input>
+n1, n2, n3 = len(group1), len(group2), len(group3)
+ssb = n1 * (mean1 - grand_mean)**2 + n2 * (mean2 - grand_mean)**2 + n3 * (mean3 - grand_mean)**2
+
+# Step 5:<input size=40 ans="27c7c047161f472db72d7d6b9bedb55209894bef1ee7ad1bc4653837d84dc11e" placeholder=5></input>
+ssw = sum((x - mean1)**2 for x in group1) + sum((x - mean2)**2 for x in group2) + sum((x - mean3)**2 for x in group3)
+
+# Step 6:<input size=40 ans="757c684580cd93e89d738cd6032f5ba6c092321259748b09dc2c1741481b5d11" placeholder=6></input>
+df_between = 3 - 1
+df_within = len(all_data) - 3
+
+# Step 7:<input size=40 ans="cff7a5635d0be19ff94a70f76aff630faffa727095e35c629da945f73a28f721" placeholder=7></input>
+msb = ssb / df_between
+msw = ssw / df_within
+
+# Step 8:<input size=40 ans="88a52e84723334c0b07818292895d379383fbce1a63376b9a515b9ab12d1baf1" placeholder=8></input>
+f_stat_manual = msb / msw
+
+# Step 9:<input size=40 ans="e977c6cc21973560ff2babd94189d1533e7557d56042c001e782524c9431530b" placeholder=9></input>
+f_stat_scipy, p_value = f_oneway(group1, group2, group3)
+
+print("One-Way ANOVA Results")
+print(f"Grand Mean: {grand_mean:.2f}")
+print(f"SSB (Between-Group Variability): {ssb:.2f}")
+print(f"SSW (Within-Group Variability): {ssw:.2f}")
+print(f"MSB: {msb:.2f}, MSW: {msw:.2f}")
+print(f"F-Statistic (Manual Calculation): {f_stat_manual:.2f}")
+print(f"F-Statistic (SciPy): {f_stat_scipy:.2f}")
+print(f"P-Value (SciPy): {p_value:.4f}")
+
+# Step 10:<input size=40 ans="478e2eb35152ff161c005057786eff7839ea2861b0c34715320fd8b57865f273" placeholder=10></input>
+alpha = 0.05
+if p_value < alpha:
+    print("Result: Reject the null hypothesis. At least one group mean is significantly different.")
+else:
+    print("Result: Fail to reject the null hypothesis. No significant difference between group means.")
+
+# Step 11:<input size=40 ans="a5d3f78198613271ccf21771c4e3e60207e1f1db27dfe46f9e83f5e18b28af3b" placeholder=11></input>
+data = pd.DataFrame({
+    'Group': ['Group 1'] * len(group1) + ['Group 2'] * len(group2) + ['Group 3'] * len(group3),
+    'Values': group1 + group2 + group3
+})
+
+plt.figure(figsize=(8, 6))
+data.boxplot(by='Group', column=['Values'], grid=False, notch=True)
+plt.title('Group Comparisons')
+plt.suptitle("")
+plt.xlabel('Groups')
+plt.ylabel('Values')
+plt.show()
+
+# Compile Solution
+One-Way ANOVA Results
+Grand Mean: 72.20
+SSB (Between-Group Variability): 1805.20
+SSW (Within-Group Variability): 721.20
+MSB: 902.60, MSW: 60.10
+F-Statistic (Manual Calculation): 15.02
+F-Statistic (SciPy): 15.02
+P-Value (SciPy): 0.0005
+Result: Reject the null hypothesis. At least one group mean is significantly different.
+
+</DIV>
+<DIV class="fr">
+1. Please choose algorithm step from the following options:
+
+SSW: Within-group variability
+
+Define data for multiple groups
+
+F-statistic
+
+Visualize group data
+
+SSB: Between-group variability
+
+Calculate degrees of freedom
+
+Combine groups for total calculations
+
+Calculate MSB and MSW
+
+Perform ANOVA
+
+Interpret results
+
+Grouping means
+
+2. Reference:
+<a href="./files/Statistical_Inferential-8-11.pdf" download>Download PDF</a>
+</DIV>
+
+</pre>
+<h2 id="answer">Answer</h2>
+<a class="btn" href="javascript:newScoring()">Answer</a>
+<script type="text/javascript">
+$(function(){
+ prettyPrint();
+});
+</script>

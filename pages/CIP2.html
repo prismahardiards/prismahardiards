@@ -1,0 +1,76 @@
+<h2 id="statement">2</h2>
+<pre class="prettyprint" id="scoring-res">
+<DIV class="fl">import numpy as np
+from scipy.stats import pearsonr
+import matplotlib.pyplot as plt
+
+# Step 1:<input size=40 ans="73794ebe48982e42e06771737aa4d2a3fbad5a99a0e4ad2c74de049d0d185849" placeholder=1></input>
+x = [43, 21, 25, 42, 57, 59, 79, 75, 87, 81]
+y = [99, 65, 79, 75, 87, 81, 109, 105, 125, 119]
+
+# Step 2:<input size=40 ans="565e5bbb24440da3f6f3ff4624a2669f7129cd592a9d85ad254e95f45c070e34" placeholder=2></input>
+r, p_value = pearsonr(x, y)
+x_mean = np.mean(x)
+y_mean = np.mean(y)
+
+# Step 3:<input size=40 ans="3c9eab7daaf4075bb5bfc8e0f0660d660188c2722de53a5f4c8296b7f24e02b6" placeholder=3></input>
+numerator = sum((xi - x_mean) * (yi - y_mean) for xi, yi in zip(x, y))
+
+# Step 4:<input size=40 ans="2817056eb16eaa6ebc0526469624a1c45f80b35c86fd76110a51d6917c4db91a" placeholder=4></input>
+denominator = np.sqrt(
+    sum((xi - x_mean)**2 for xi in x) * sum((yi - y_mean)**2 for yi in y)
+)
+# Step 5:<input size=40 ans="20ba8cfb41c15638b916790c32cfe2cf6a22962c89f7bd830646dfd493598f1d" placeholder=5></input>
+r_manual = numerator / denominator
+
+print("Pearson Correlation Coefficient Results")
+print(f"Correlation Coefficient (r): {r:.2f}")
+print(f"P-Value: {p_value:.4f}")
+print(f"Manually Calculated Correlation Coefficient (r): {r_manual:.2f}")
+
+# Step 6:<input size=40 ans="2780d10f8c289ee0bacc54f9d1b20c1ec89208a21b3e9717643565b193e24add" placeholder=6></input>
+plt.figure(figsize=(8, 5))
+plt.scatter(x, y, alpha=0.7, label="Data Points")
+plt.xlabel("Variable X")
+plt.ylabel("Variable Y")
+plt.title("Scatter Plot of X vs Y")
+plt.axhline(y=np.mean(y), color='red', linestyle='--', label='Mean of Y')
+plt.axvline(x=np.mean(x), color='blue', linestyle='--', label='Mean of X')
+plt.legend()
+plt.show()
+
+# Compile Solution
+Pearson Correlation Coefficient Results
+Correlation Coefficient (r): 0.89
+P-Value: 0.0006
+Manually Calculated Correlation Coefficient (r): 0.89
+
+</DIV>
+<DIV class="fr">
+1. Please choose algorithm step from the following options:
+
+Compute Pearson correlation coefficient
+
+Visualize the Relationship
+
+Denominator: Product of standard deviations of x and y
+
+Calculate Pearson Correlation Coefficient
+
+Define two continuous variables
+
+Numerator: Covariance between x and y
+
+2. Reference:
+<a href="./files/Statistical_Inferential-5-7.pdf" download>Download PDF</a>
+</DIV>
+
+
+</pre>
+<h2 id="answer">Answer</h2>
+<a class="btn" href="javascript:newScoring()">Answer</a>
+<script type="text/javascript">
+$(function(){
+ prettyPrint();
+});
+</script>

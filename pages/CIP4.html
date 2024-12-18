@@ -1,0 +1,125 @@
+<h2 id="statement">4</h2>
+<pre class="prettyprint" id="scoring-res">
+<DIV class="fl">
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+# Step 1:<input size=40 ans="51596eb757d13e3267a2abfef78c5ed9439cf3fa2c39f6078b5f7299352c1179" placeholder=1></input>
+data = {
+    'Feature1': [2.5, 0.5, 2.2, 1.9, 3.1, 2.3, 2, 1, 1.5, 1.1],
+    'Feature2': [2.4, 0.7, 2.9, 2.2, 3, 2.7, 1.6, 1.1, 1.6, 0.9]
+}
+df = pd.DataFrame(data)
+
+# Step 2:<input size=40 ans="ced9a0ee8df3b7e099511ca2c9727a6738ae5b91f08b495b828fc1146b3e08e3" placeholder=2></input>
+scaler = StandardScaler()
+data_scaled = scaler.fit_transform(df)
+
+# Step 3:<input size=40 ans="fc0fc357488d6645c20610a1dcef3a7b451b7bfaad6c14b105ad39e6629ba17f" placeholder=3></input>
+pca = PCA(n_components=2)
+principal_components = pca.fit_transform(data_scaled)
+pca_df = pd.DataFrame(data=principal_components, columns=['PC1', 'PC2'])
+
+# Step 4:<input size=40 ans="c5af8700407f390c0b6f053ba6b8b847a80206f6454579d880e57e2576dcee66" placeholder=4></input>
+explained_variance = pca.explained_variance_ratio_
+
+print("Original Data:")
+print(df)
+print("\nStandardized Data:")
+print(data_scaled)
+print("\nPrincipal Components:")
+print(pca_df)
+print("\nExplained Variance Ratio:")
+print(explained_variance)
+
+# Step 5:<input size=40 ans="87fd23a9eb54222ffeed766cf95b7161728b7da6514966ce25a6888a1461469c" placeholder=5></input>
+plt.figure(figsize=(8, 5))
+plt.plot(np.cumsum(explained_variance), marker='o', linestyle='--')
+plt.title('Cumulative Explained Variance')
+plt.xlabel('Number of Components')
+plt.ylabel('Cumulative Variance Explained')
+plt.grid()
+plt.show()
+
+# Step 6:<input size=40 ans="5aba0373d1a5edfdee9f010a2924d994e5b6dac703bc1c607991508c34301614" placeholder=6></input>
+plt.figure(figsize=(8, 6))
+plt.scatter(pca_df['PC1'], pca_df['PC2'], edgecolor='k', s=100)
+plt.title('Data in Principal Component Space')
+plt.xlabel('Principal Component 1')
+plt.ylabel('Principal Component 2')
+plt.grid()
+plt.show()
+
+# Compile Solution
+Original Data:
+   Feature1  Feature2
+0       2.5       2.4
+1       0.5       0.7
+2       2.2       2.9
+3       1.9       2.2
+4       3.1       3.0
+5       2.3       2.7
+6       2.0       1.6
+7       1.0       1.1
+8       1.5       1.6
+9       1.1       0.9
+
+Standardized Data:
+[[ 0.92627881  0.61016865]
+ [-1.7585873  -1.506743  ]
+ [ 0.52354889  1.23278973]
+ [ 0.12081898  0.36112022]
+ [ 1.73173864  1.35731394]
+ [ 0.6577922   0.9837413 ]
+ [ 0.25506228 -0.38602507]
+ [-1.08737078 -1.00864614]
+ [-0.41615425 -0.38602507]
+ [-0.95312747 -1.25769457]]
+
+Principal Components:
+        PC1       PC2
+0  1.086432 -0.223524
+1 -2.308937  0.178081
+2  1.241919  0.501509
+3  0.340782  0.169919
+4  2.184290 -0.264758
+5  1.160739  0.230481
+6 -0.092605 -0.453317
+7 -1.482108  0.055667
+8 -0.567226  0.021305
+9 -1.563287 -0.215361
+
+Explained Variance Ratio:
+[0.96296464 0.03703536]
+
+</DIV>
+<DIV class="fr">
+1. Please choose algorithm step from the following options:
+
+Plot cumulative variance explained
+
+Apply PCA
+
+Visualize principal components
+
+Analyze variance explained
+
+Standardize the data
+
+Define the dataset
+
+2. Reference:
+<a href="./files/Statistical_Inferential-12-15.pdf" download>Download PDF</a>
+</DIV>
+
+</pre>
+<h2 id="answer">Answer</h2>
+<a class="btn" href="javascript:newScoring()">Answer</a>
+<script type="text/javascript">
+$(function(){
+ prettyPrint();
+});
+</script>

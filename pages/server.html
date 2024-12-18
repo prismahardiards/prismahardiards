@@ -1,0 +1,105 @@
+<h2 id="statement">1</h2> 
+<pre class="prettyprint" id="scoring-res">
+<DIV class="fl">#include < stdio.h >
+#include < sys/types.h >
+#include < sys/socket.h >
+#include < netinet/in.h >
+ 
+int main(int argc, char** argv){
+    int sd;
+    int acc_sd;
+    struct sockaddr_in addr;
+ 
+    socklen_t sin_size = sizeof(struct sockaddr_in);
+    struct sockaddr_in from_addr;
+ 
+    char buf[2048];
+ 
+   // <input size=25 ans="1bb1496ad43d038a1a577fa396ddb4cbdfb31ceb708f2b850189e97ce88138b6" placeholder=1></input> 
+    memset(buf, 0, sizeof(buf));
+ 
+    // <input size=25 ans="7d208d06680eb599819cf82b6ad43d9a3aeb4b9601f992e18060efc619749e13" placeholder=2></input> 
+    if((sd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        perror("socket");
+        return -1;
+    }
+ 
+    // <input size=25 ans="86635d176b94db4cc852fa6ce3bea2233bee8409f2c234b7051bc0e02455b595" placeholder=3></input> 
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(22222);
+    addr.sin_addr.s_addr = INADDR_ANY;
+ 
+    // <input size=25 ans="a7479c4f8817e6f65ac13cd8f73eb70ab35fd7af9862c3dd122e5cf64cc4d0d1" placeholder=4></input> 
+    if(bind(sd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+        perror("bind");
+        return -1;
+    }
+ 
+    // <input size=25 ans="8cc632891e282d1582000e56cbe457bb0aa643c448f2ff7225a1dff33cd70288" placeholder=5></input> 
+    if(listen(sd, 10) < 0) {
+        perror("listen");
+        return -1;
+    }
+ 
+    // <input size=25 ans="2dacfbf7a24e1b9a36aaa4f4ee97d31b6d8bb5aa9ecba1f29883f118a1d123bf" placeholder=6></input> 
+    if((acc_sd = accept(sd, (struct sockaddr *)&from_addr, &sin_size)) < 0) {
+        perror("accept");
+        return -1;
+    }
+  
+    // <input size=25 ans="c6ecc8b84bc884a66b73061ba986368a5e1d98b90357a8593367cf69dfa04838" placeholder=7></input>
+    if(recv(acc_sd, buf, sizeof(buf), 0) < 0) {
+        perror("recv");
+        return -1;
+    }
+ 
+    // <input size=25 ans="0663eb2c9a5ff680db97cac68d7d20063e9dd07241c4c5024fc176f76c180f46" placeholder=8></input>
+    close(acc_sd);
+ 
+    // <input size=25 ans="9604336e45f94b81f9e63c285f640934d0f6a3ceb548a994207362c4cb1cc478" placeholder=9></input> 
+    close(sd);
+ 
+    // <input size=25 ans="f2ad55df6174260c2b531b4815f76b9ea50aabc3c00bab40726b84e065d603d8" placeholder=10></input> 
+    printf("%s\n", buf);
+ 
+    return 0;
+}
+
+
+</DIV>
+<DIV class="fr">下記の選択肢から選んでください:
+
+クライアントからコネクト要求が来るまで停止する,サーバ側はacc_sdを使ってパケットの送受信を行う
+
+パケット受信待ち状態とする,待ちうけキューを１０としている
+
+IPv4TCPのソケットを作成
+
+待ち受けるIPとポート番号を設定
+
+接続要求待ち受け用ソケットをクローズ
+
+パケット受信.パケットが到着するまでブロック
+
+パケット送受信用ソケットのクローズ
+
+受信データの出力
+
+バインドする
+
+受信バッファの初期化
+
+</DIV>
+
+
+
+
+
+</pre>
+<h2 id="answer">Answer</h2>
+<a class="btn" href="javascript:newScoring()">Answer</a>
+<script type="text/javascript">
+$(function(){
+ prettyPrint();
+});
+</script>

@@ -1,0 +1,110 @@
+<h2 id="statement">1</h2>
+<pre class="prettyprint" id="scoring-res">
+<DIV class="fl">import numpy as np
+from scipy.stats import ttest_1samp, shapiro
+import matplotlib.pyplot as plt
+
+# Step 1:<input size=40 ans="a9c0dc22355a6ec407ffa2bba7caef8763acfa0c9cfda471e352e9d0e06328b7" placeholder=1></input>
+data = [50, 52, 47, 49, 51, 53, 48, 50, 49, 52]  # Example sample data
+population_mean = 50  # The known population mean
+
+# Step 2:<input size=40 ans="3c5f83f6655211555c54129d0bf75394e8b5622317b86e253e22bd760addbd81" placeholder=2></input>
+alpha = 0.05
+stat, p_normality = shapiro(data)
+if p_normality > alpha:
+    print("The data appears to be normally distributed.")
+else:
+    print("The data does not appear to be normally distributed. Be cautious with the t-test results.")
+
+# Step 3:<input size=40 ans="7b29debb7125e596eab5c0ac8446cac5ec6e2bf7910109eaf02d3006d31538f6" placeholder=3></input>
+mean = np.mean(data)
+
+# Step 4:<input size=40 ans="11d6d03878baa255b54f9bfde839ce3e91e73056141e024e5337f426bd83ae35" placeholder=4></input>
+std = np.std(data, ddof=1)
+
+# Step 5:<input size=40 ans="d3a782cc80b4ffe46d132cd2349d34098c37afaef272fa29af85b603d95a294b" placeholder=5></input>
+n = len(data)
+
+# Step 6:<input size=40 ans="35bc4e1311f22ffbc8f8801e1c212d9028cbffc5ceba90e55353e4b5ce83f875" placeholder=6></input>
+t_stat_manual = (mean - population_mean) / (std / np.sqrt(n))
+
+print(f"\nManually Calculated Statistics:")
+print(f"Sample Mean: {mean:.2f}")
+print(f"Sample Standard Deviation: {std:.2f}")
+print(f"Sample Size: {n}")
+print(f"T-Statistic (Manual Calculation): {t_stat_manual:.2f}")
+
+# Step 7:<input size=40 ans="778f1a69367442ebc3ada575fe1d055c2fd7345c6d223c57359d287285624dba" placeholder=7></input>
+t_statistic, p_value = ttest_1samp(data, population_mean)
+
+print("\nOne-Sample t-Test Results (Using SciPy)")
+print(f"T-Statistic (SciPy): {t_statistic:.2f}")
+print(f"P-Value: {p_value:.4f}")
+
+# Step 8:<input size=40 ans="aa1b6bc2b686a862b0be2de7828bb66dcb791251252e361ec0d7f1cc66077682" placeholder=8></input>
+if p_value < alpha:
+    print("Result: Reject the null hypothesis.")
+    print("The sample mean is significantly different from the population mean.")
+else:
+    print("Result: Fail to reject the null hypothesis.")
+    print("The sample mean is not significantly different from the population mean.")
+
+# Step 9: _9_
+plt.figure(figsize=(8, 5))
+plt.hist(data, bins=5, alpha=0.7, label='Sample Data')
+plt.axvline(x=population_mean, color='red', linestyle='--', label='Population Mean')
+plt.axvline(x=mean, color='blue', linestyle='-', label='Sample Mean')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.title('Sample Data vs. Population Mean')
+plt.legend()
+plt.show()
+
+# Compile Solution
+The data appears to be normally distributed.
+
+Manually Calculated Statistics:
+Sample Mean: 50.10
+Sample Standard Deviation: 1.91
+Sample Size: 10
+T-Statistic (Manual Calculation): 0.17
+
+One-Sample t-Test Results (Using SciPy)
+T-Statistic (SciPy): 0.17
+P-Value: 0.8723
+Result: Fail to reject the null hypothesis.
+The sample mean is not significantly different from the population mean.
+
+</DIV>
+<DIV class="fr">
+1. Please choose algorithm step from the following options:
+
+Calculate the sample size
+
+Calculate the t-statistic
+
+Interpret the results
+
+Check assumptions
+
+Define the dataset
+
+Visualize the data
+
+Calculate the sample mean
+
+Calculate the sample standard deviation
+
+2. Reference:
+<a href="./files/Statistical_Inferential-1-4.pdf" download>Download PDF</a>
+</DIV>
+
+
+</pre>
+<h2 id="answer">Answer</h2>
+<a class="btn" href="javascript:newScoring()">Answer</a>
+<script type="text/javascript">
+$(function(){
+ prettyPrint();
+});
+</script>

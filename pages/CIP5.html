@@ -1,0 +1,100 @@
+<h2 id="statement">5</h2>
+<pre class="prettyprint" id="scoring-res">
+<DIV class="fl">
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Step 1:<input size=40 ans="fc14bf8eb786c67e4db11f5595a0061f17ff05757b235e4a16dc970f115ac866" placeholder=1></input>
+data = {
+    'X': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    'Y': [2.3, 4.5, 6.7, 8.1, 10.4, 12.3, 14.5, 16.2, 18.8, 20.1]
+}
+df = pd.DataFrame(data)
+
+# Step 2:<input size=40 ans="baef9a6890744504882d7efbd9df47a131efb5421acff4412bdf97e69e0dea02" placeholder=2></input>
+X = df[['X']]
+Y = df['Y']
+
+# Step 3:<input size=40 ans="e53e0e8d01a2609a31e05bb0cc8a325372034b5396c07082e85c58dcebbb77a6" placeholder=3></input>
+plt.figure(figsize=(8, 6))
+plt.scatter(X, Y, color='blue', label='Data points')
+plt.title('Scatter Plot of X vs Y')
+plt.xlabel('X (Independent Variable)')
+plt.ylabel('Y (Dependent Variable)')
+plt.legend()
+plt.grid()
+plt.show()
+
+# Step 4:<input size=40 ans="a81223d9c87d453d4a4d792b9528bb0605fea4b1d6b8e1b54d92810685902d8a" placeholder=4></input>
+model = LinearRegression()
+model.fit(X, Y)
+
+# Step 5:<input size=40 ans="c68d26f0601f378dbbc24459231bd546566cc91b3f70987c6791d83af2b0976d" placeholder=5></input>
+intercept = model.intercept_
+slope = model.coef_[0]
+print(f"Intercept (β₀): {intercept:.2f}")
+print(f"Slope (β₁): {slope:.2f}")
+
+# Step 6:<input size=40 ans="08996d81cecc6f086190e026928bf2085d8086f08cc0bb98623316f3a651f5d5" placeholder=6></input>
+Y_pred = model.predict(X)
+df['Y_pred'] = Y_pred
+
+# Step 7:<input size=40 ans="042f7b0848e77e45e8e1b4a7303259afa7bdf4f3a5b96b825f14f28b623a54aa" placeholder=7></input>
+r2 = r2_score(Y, Y_pred)
+mse = mean_squared_error(Y, Y_pred)
+print(f"R² (Coefficient of Determination): {r2:.2f}")
+print(f"Mean Squared Error (MSE): {mse:.2f}")
+
+# Step 8:<input size=40 ans="6f5d69790806fa2e0805a0d7eadf3f0181d0c202051b51a99486a6b7d19f483e" placeholder=8></input>
+plt.figure(figsize=(8, 6))
+plt.scatter(X, Y, color='blue', label='Data points')
+plt.plot(X, Y_pred, color='red', label='Regression line')
+plt.title('Simple Linear Regression')
+plt.xlabel('X (Independent Variable)')
+plt.ylabel('Y (Dependent Variable)')
+plt.legend()
+plt.grid()
+plt.show()
+
+# Compile Solution
+Intercept (β₀): 0.43
+Slope (β₁): 1.99
+R² (Coefficient of Determination): 1.00
+Mean Squared Error (MSE): 0.05
+
+</DIV>
+<DIV class="fr">
+1. Please choose algorithm step from the following options:
+
+Make predictions
+
+Get model parameters
+
+Define the dataset
+
+Visualize the regression line
+
+Fit the Linear Regression Model
+
+Visualize the data
+
+Separate the independent and dependent variables
+
+Evaluate the model
+
+2. Reference:
+<a href="./files/Statistical_Inferential-6-18.pdf" download>Download PDF</a>
+</DIV>
+
+
+</pre>
+<h2 id="answer">Answer</h2>
+<a class="btn" href="javascript:newScoring()">Answer</a>
+<script type="text/javascript">
+$(function(){
+ prettyPrint();
+});
+</script>
